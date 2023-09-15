@@ -9,7 +9,14 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(${PROJECT_NAME} src/Main.cpp)
+add_executable(${PROJECT_NAME}
+        src/Main.cpp
+        src/Food.hpp
+        src/Food.cpp
+        src/Snake.cpp
+        src/Snake.hpp
+        src/Constant.hpp)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 

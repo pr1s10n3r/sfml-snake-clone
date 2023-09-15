@@ -1,8 +1,17 @@
 #include <SFML/Graphics.hpp>
 
+#include "Food.hpp"
+#include "Snake.hpp"
+#include "Constant.hpp"
+
 int main() {
-    auto window = sf::RenderWindow({750u, 750u}, "SFML Snake Clone");
+    const uint16_t screenSize = snake::GRID_CELL_SIZE * snake::GRID_CELL_COUNT;
+
+    auto window = sf::RenderWindow({screenSize, screenSize}, "SFML Snake Clone");
     window.setFramerateLimit(60);
+
+    snake::Food food;
+    snake::Snake snake;
 
     while (window.isOpen()) {
         for (auto event = sf::Event{}; window.pollEvent(event);) {
@@ -11,7 +20,11 @@ int main() {
             }
         }
 
-        window.clear();
+        window.clear(snake::LIGHT_GREEN_COLOR);
+
+        window.draw(food);
+        window.draw(snake);
+
         window.display();
     }
 
