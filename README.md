@@ -1,3 +1,7 @@
+# SFML Snake Clone
+
+![Screenshot running on KDE Plasma](./images/screenshot.png "SFML Snake Clone running")
+
 ## Install Dependencies
 
 My main development environment is a Linux PC with KDE Neon, so I could not
