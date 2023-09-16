@@ -15,7 +15,9 @@ add_executable(${PROJECT_NAME}
         src/Food.cpp
         src/Snake.cpp
         src/Snake.hpp
-        src/Constant.hpp)
+        src/Constant.hpp
+        src/Game.cpp
+        src/Game.hpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
@@ -28,4 +30,5 @@ if (WIN32)
             VERBATIM)
 endif ()
 
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 install(TARGETS ${PROJECT_NAME})

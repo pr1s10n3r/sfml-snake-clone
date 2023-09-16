@@ -17,43 +17,37 @@
 
 #pragma once
 
-#include <deque>
-#include <SFML/Graphics.hpp>
-#include <SFML/System/Vector2.hpp>
+#include "Snake.hpp"
+#include "Food.hpp"
 
 namespace snake {
-    class Snake : public sf::Drawable {
+    class Game : public sf::Drawable {
     public:
+        Game();
+
         void draw(sf::RenderTarget &target, sf::RenderStates state) const override;
 
         void update();
 
-        bool isEatingItself() const;
+        void unpause() { pause = false; };
 
-        inline void goUp() { direction = {0, -1}; }
+        [[nodiscard]] sf::RectangleShape getWindowFrame() const;
 
-        inline void goDown() { direction = {0, 1}; }
-
-        inline void goLeft() { direction = {-1, 0}; }
-
-        inline void goRight() { direction = {1, 0}; }
-
-        [[nodiscard]] inline sf::Vector2i getDirection() const { return direction; }
-
-        [[nodiscard]] inline sf::Vector2i getHeadPosition() const { return body.front(); }
-
-        [[nodiscard]] inline std::deque<sf::Vector2i> getBody() const { return body; }
-
-        void grow();
-
-        void reset();
+        [[nodiscard]] sf::Text getScoreText() const;
 
     private:
-        sf::Vector2i direction = {1, 0};
-        std::deque<sf::Vector2i> body{
-                sf::Vector2i{6, 9},
-                sf::Vector2i{5, 9},
-                sf::Vector2i{4, 9},
-        };
+        bool pause;
+        uint8_t score;
+
+        Snake snake;
+        Food food;
+        sf::Clock clock;
+        sf::Font font;
+
+        void snakeEat();
+
+        void snakeCollisions();
+
+        void gameOver();
     };
 } // namespace snake
